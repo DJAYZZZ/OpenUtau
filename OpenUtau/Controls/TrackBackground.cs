@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Linq;
 using System.Reactive.Linq;
 using Avalonia;
@@ -30,6 +31,11 @@ namespace OpenUtau.App.Controls {
                 nameof(IsKeyboard),
                 o => o.IsKeyboard,
                 (o, v) => o.IsKeyboard = v);
+        public static readonly DirectProperty<TrackBackground, int> KeyProperty =
+            AvaloniaProperty.RegisterDirect<TrackBackground, int>(
+                nameof(Key),
+                o => o.Key,
+                (o, v) => o.Key = v);
 
         public double TrackHeight {
             get => _trackHeight;
@@ -47,11 +53,16 @@ namespace OpenUtau.App.Controls {
             get => _isKeyboard;
             set => SetAndRaise(IsPianoRollProperty, ref _isKeyboard, value);
         }
+        public int Key {
+            get => _key;
+            set => SetAndRaise(KeyProperty, ref _key, value);
+        }
 
         private double _trackHeight;
         private double _trackOffset;
         private bool _isPianoRoll;
         private bool _isKeyboard;
+        private int _key;
 
         public TrackBackground() {
             MessageBus.Current.Listen<ThemeChangedEvent>()
@@ -62,12 +73,13 @@ namespace OpenUtau.App.Controls {
             base.OnPropertyChanged(change);
             if (change.Property == TrackHeightProperty ||
                 change.Property == TrackOffsetProperty ||
-                change.Property == ForegroundProperty) {
+                change.Property == ForegroundProperty ||
+                change.Property == KeyProperty) {
                 InvalidateVisual();
             }
         }
 
-        int mod(int a, int b){
+        int mod(int a, int b) {
             return (a % b + b) % b;
         }
 
@@ -77,9 +89,8 @@ namespace OpenUtau.App.Controls {
             }
             int track = (int)TrackOffset;
             double top = TrackHeight * (track - TrackOffset);
-            int key = DocManager.Inst.Project == null ? 0 : DocManager.Inst.Project.key;
             string[] degreeNames;
-            switch(Preferences.Default.DegreeStyle){
+            switch (Preferences.Default.DegreeStyle) {
                 case 1:
                     degreeNames = MusicMath.Solfeges;
                     break;
@@ -112,7 +123,7 @@ namespace OpenUtau.App.Controls {
                         toneTextLayout.Draw(context, new Point());
                     }
                     //scale degree display
-                    int degree = mod(tone - key, 12);
+                    int degree = mod(tone - Key, 12);
                     string degreeName = degreeNames[degree];
                     var degreeTextLayout = TextLayoutCache.Get(degreeName, brush, 12);
                     var degreeTextPosition = new Point(4, (int)(top + (TrackHeight - degreeTextLayout.Height) / 2));

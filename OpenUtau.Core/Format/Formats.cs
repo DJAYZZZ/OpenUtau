@@ -5,7 +5,7 @@ using OpenUtau.Classic;
 using OpenUtau.Core.Ustx;
 
 namespace OpenUtau.Core.Format {
-    public enum ProjectFormats { Unknown, Vsq3, Vsq4, Ust, Ustx, Midi, Ufdata };
+    public enum ProjectFormats { Unknown, Vsq3, Vsq4, Ust, Ustx, Midi, Ufdata, Musicxml };
 
     public static class Formats {
         const string ustMatch = "[#SETTING]";
@@ -15,6 +15,7 @@ namespace OpenUtau.Core.Format {
         const string vsq4Match = VSQx.vsq4NameSpace;
         const string midiMatch = "MThd";
         const string ufdataMatch = "\"formatVersion\":";
+        const string musicxmlMatch = "score-partwise";
 
         public static ProjectFormats DetectProjectFormat(string file) {
             var lines = new List<string>();
@@ -36,6 +37,8 @@ namespace OpenUtau.Core.Format {
                 return ProjectFormats.Midi;
             } else if (contents.Contains(ufdataMatch)) {
                 return ProjectFormats.Ufdata;
+            } else if (contents.Contains(musicxmlMatch)) {
+                return ProjectFormats.Musicxml;
             } else {
                 return ProjectFormats.Unknown;
             }
@@ -45,7 +48,7 @@ namespace OpenUtau.Core.Format {
         /// Read project from files to a new UProject object, used by LoadProject and ImportTracks.
         /// </summary>
         /// <param name="files">Names of the files to be loaded</param>
-        public static UProject? ReadProject(string[] files){
+        public static UProject? ReadProject(string[] files) {
             if (files.Length < 1) {
                 return null;
             }
@@ -67,6 +70,9 @@ namespace OpenUtau.Core.Format {
                     break;
                 case ProjectFormats.Ufdata:
                     project = Ufdata.Load(files[0]);
+                    break;
+                case ProjectFormats.Musicxml:
+                    project = MusicXML.LoadProject(files[0]);
                     break;
                 default:
                     throw new FileFormatException("Unknown file format");
@@ -91,7 +97,7 @@ namespace OpenUtau.Core.Format {
         /// </summary>
         /// <param name="files">Names of the files to be loaded</param>
         /// <returns></returns>
-        public static UProject[] ReadProjects(string[] files){
+        public static UProject[] ReadProjects(string[] files) {
             if (files == null || files.Length < 1) {
                 return new UProject[0];
             }

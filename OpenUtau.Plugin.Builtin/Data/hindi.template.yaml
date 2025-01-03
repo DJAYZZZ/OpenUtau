@@ -1,0 +1,81 @@
+﻿%YAML 1.2
+---
+symbols:
+  # Vowels (स्वर)
+  - {symbol: a, type: vowel}
+  - {symbol: aa, type: vowel}
+  - {symbol: i, type: vowel}
+  - {symbol: ii, type: vowel}
+  - {symbol: u, type: vowel}
+  - {symbol: uu, type: vowel}
+  - {symbol: e, type: vowel}
+  - {symbol: ai, type: vowel}
+  - {symbol: o, type: vowel}
+  - {symbol: au, type: vowel}
+  - {symbol: am, type: nasal}  # Anusvara (अं)
+  - {symbol: ah, type: vowel}  # Visarga (अः)
+
+  # Stops (व्यंजन - अल्पप्राण & महाप्राण)
+  - {symbol: ka, type: stop}       # क
+  - {symbol: kha, type: aspirated_stop}  # ख
+  - {symbol: ga, type: stop}       # ग
+  - {symbol: gha, type: aspirated_stop}  # घ
+  - {symbol: ng, type: nasal}     # ङ
+  - {symbol: cha, type: affricate}       # च
+  - {symbol: chha, type: aspirated_affricate}  # छ
+  - {symbol: ja, type: affricate}       # ज
+  - {symbol: jha, type: aspirated_affricate}  # झ
+  - {symbol: ny, type: nasal}     # ञ
+  - {symbol: ta, type: stop}       # ट
+  - {symbol: tha, type: aspirated_stop}  # ठ
+  - {symbol: da, type: stop}       # ड
+  - {symbol: dha, type: aspirated_stop}  # ढ
+  - {symbol: nna, type: nasal}     # ण (Retroflex nasal)
+  - {symbol: tta, type: stop}      # त
+  - {symbol: ttha, type: aspirated_stop}  # थ
+  - {symbol: dda, type: stop}      # द
+  - {symbol: ddha, type: aspirated_stop}  # ध
+  - {symbol: na, type: nasal}      # न
+  - {symbol: pa, type: stop}       # प
+  - {symbol: pha, type: aspirated_stop}  # फ
+  - {symbol: ba, type: stop}       # ब
+  - {symbol: bha, type: aspirated_stop}  # भ
+  - {symbol: ma, type: nasal}      # म
+
+  # Fricatives (श्वास व्यंजन)
+  - {symbol: sa, type: fricative}       # स
+  - {symbol: sha, type: fricative}      # श
+  - {symbol: ssa, type: fricative}      # ष
+  - {symbol: ha, type: fricative}       # ह
+
+  # Liquids (तरल व्यंजन)
+  - {symbol: la, type: liquid}          # ल
+  - {symbol: lla, type: liquid}         # ळ
+  - {symbol: ra, type: liquid}          # र
+
+  # Semivowels (अर्धस्वर)
+  - {symbol: ya, type: semivowel}       # य
+  - {symbol: va, type: semivowel}       # व
+
+  # Additional Nasals
+  - {symbol: mh, type: nasal}          # ँ (Chandrabindu)
+
+entries:
+  - grapheme: हिंदी
+    phonemes: [h, i, n, d, i]
+  - grapheme: भारत
+    phonemes: [bh, aa, r, t]
+  - grapheme: संगीत
+    phonemes: [s, ng, g, i, t]
+  - grapheme: स्वर
+    phonemes: [s, v, a, r]
+  - grapheme: गाना
+    phonemes: [g, aa, n, aa]
+  - grapheme: टमाटर
+    phonemes: [t, aa, m, aa, t, r]
+  - grapheme: विद्यालय
+    phonemes: [v, i, dd, y, aa, l, y]
+  - grapheme: पुस्तक
+    phonemes: [p, uu, s, t, k]
+  - grapheme: अच्छा
+    phonemes: [ah, chh, aa]

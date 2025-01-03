@@ -29,7 +29,7 @@ namespace OpenUtau.Core.Util {
         public Type GetPreferred() {
             return Available.FirstOrDefault(
                 avail => avail.Name == Preferences.Default.LyricHelper)
-                ?? typeof(HiraganaLyricsHelper);
+                ?? typeof(HindiG2pLyricsHelper);
         }
 
         public readonly List<Type> Available = new List<Type>() {
@@ -37,6 +37,7 @@ namespace OpenUtau.Core.Util {
             typeof(PinyinLyricsHelper),
             typeof(JyutpingLyricsHelper),
             typeof(ArpabetG2pLyricsHelper),
+            typeof(HindiG2pLyricsHelper),
             typeof(ArpabetPlusG2pLyricsHelper),
             typeof(FrenchG2pLyricsHelper),
             typeof(GermanG2pLyricsHelper),
@@ -83,6 +84,10 @@ namespace OpenUtau.Core.Util {
             return string.Join(" ", pack.Query(lyric));
         }
     }
+    public class HindiG2pLyricsHelper : G2pLyricsHelper {
+        public HindiG2pLyricsHelper() : base(new ArpabetG2p()) { }
+    }
+
 
     public class ArpabetG2pLyricsHelper : G2pLyricsHelper {
         public ArpabetG2pLyricsHelper() : base(new ArpabetG2p()) { }
